@@ -10,6 +10,6 @@ def roll(str)
   end
   sum = 0
   result.each do |e| sum += e end
-	puts result.sort { |x,y| y <=> x }
+	puts result
 	puts "sum is: #{sum}"
 end

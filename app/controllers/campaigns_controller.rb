@@ -4,12 +4,13 @@ class CampaignsController < ApplicationController
   # GET /campaigns
   # GET /campaigns.json
   def index
-    @campaigns = Campaign.all
+    @campaigns = Campaign.where(user_id: current_user)
   end
 
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show
+    @characters = Character.where(campaign_id: params[:id]).order(initiative: :desc)
   end
 
   # GET /campaigns/new
