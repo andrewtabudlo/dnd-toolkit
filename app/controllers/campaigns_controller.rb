@@ -62,6 +62,16 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def reroll
+    @characters = Character.where(campaign_id: params[:id])
+    @characters.each do |c|
+      char = Character.find(c.id)
+      char.initiative = rand(20) + 1
+      char.save
+    end
+    redirect_to "/campaigns/#{params[:id]}"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_campaign

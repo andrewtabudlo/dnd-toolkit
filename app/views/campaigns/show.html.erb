@@ -1,16 +1,59 @@
 <p id="notice"><%= notice %></p>
 
-<% @characters.each do |c| %>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"><%= c.name %></h5>
-      <h6 class="card-subtitle mb-2 text-muted">HP: <%= c.hp %></h6>
-      <p class="card-text">Initiative Roll: <%= c.initiative %></p>
-      <%= link_to 'Edit', edit_character_path(c), class: "btn btn-outline-secondary btn-sm" %>
-      <a href="#" class="btn btn-outline-secondary btn-sm">Done</a>
-    </div>
+<div class="row">
+
+  <div class="col-2">
+    <h1>Dice Roller</h1>
+    <input class="d-inline-block" id="diceNum" type="text" size="3" value="3">
+    <p class="d-inline-block">d</p>
+    <input class="d-inline-block" id="diceSides" type="text" size="3" value="20">
+    <button class="d-inline-block" id="diceRoll">Roll</button>
+    <textarea readonly id="dieContainer" class="dice"></textarea>
   </div>
-<% end %>
+
+  <div class="col-8">
+    <h1 class="text-center">Sound Board</h1>
+  </div>
+
+  <div class="col-2">
+    <h1>Initiative Tracker</h1>
+    <% @characters.each do |c| %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= c.name %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">HP: <%= c.hp %></h6>
+        <p class="card-text">Initiative Roll: <%= c.initiative %></p>
+        <%= link_to 'Edit', edit_character_path(c), class: "btn btn-outline-secondary btn-sm" %>
+        <a href="#" class="btn btn-outline-secondary btn-sm">Done</a>
+      </div>
+    </div>
+    <% end %>
+    <%= button_to 'Reroll', reroll_campaign_path, method: :put,data: { confirm: 'Are you sure you want to reset all initiative rolls?' }, remote: true %>
+  </div>
+
+</div>
+
 
 <%= link_to 'Edit', edit_campaign_path(@campaign) %> |
 <%= link_to 'Back', campaigns_path %>
+
+<script type="text/javascript">
+$('#diceRoll').click(function(){
+  $('#dieContainer').text('');
+  let numDice = $("#diceNum").val();
+  let numSides = $("#diceSides").val();
+  let container = $("#dieContainer");
+  let sum = [];
+
+  for (let i = 0; i < numDice; i++) {
+    let result = Math.floor(Math.random() * numSides) + 1;
+    sum.push(result);
+    $('#dieContainer').append(result + " " + "&#013;");
+  };
+  $('#dieContainer').append("_____");
+  $('#dieContainer').append("&#013;");
+  $('#dieContainer').append(sum.reduce((a, b) => a + b, 0));
+  $('#dieContainer').append("&#013;");
+  $('#dieContainer').append("&#013;");
+});
+</script>
