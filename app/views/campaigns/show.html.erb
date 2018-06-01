@@ -17,18 +17,10 @@
 
   <div class="col-2">
     <h1>Initiative Tracker</h1>
-    <% @characters.each do |c| %>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><%= c.name %></h5>
-        <h6 class="card-subtitle mb-2 text-muted">HP: <%= c.hp %></h6>
-        <p class="card-text">Initiative Roll: <%= c.initiative %></p>
-        <%= link_to 'Edit', edit_character_path(c), class: "btn btn-outline-secondary btn-sm" %>
-        <a href="#" class="btn btn-outline-secondary btn-sm">Done</a>
-      </div>
+    <div id="charContainer">
+      <%= render 'characters' %>
     </div>
-    <% end %>
-    <%= button_to 'Reroll', reroll_campaign_path, method: :put,data: { confirm: 'Are you sure you want to reset all initiative rolls?' }, remote: true %>
+    <%= link_to 'Reroll', reroll_campaign_path, id:"reroll", method: :put, data: { confirm: 'Are you sure you want to reset all initiative rolls?' }, remote: true %>
   </div>
 
 </div>
@@ -56,4 +48,14 @@ $('#diceRoll').click(function(){
   $('#dieContainer').append("&#013;");
   $('#dieContainer').append("&#013;");
 });
+
+$('#reroll').click(function(){
+      $('#charContainer').append("<%= j render 'characters' %>");
+});
+
+var sound = new Howl({
+  src: ['sound.mp3']
+});
+
+sound.play();
 </script>
