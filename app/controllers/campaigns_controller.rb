@@ -69,7 +69,7 @@ class CampaignsController < ApplicationController
       char.initiative = rand(20) + 1
       char.save
     end
-    redirect_to "/campaigns/#{params[:id]}"
+    # redirect_to "/campaigns/#{params[:id]}"
   end
 
   private

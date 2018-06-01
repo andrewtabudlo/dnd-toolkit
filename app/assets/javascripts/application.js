@@ -15,5 +15,6 @@
 //= require rails-ujs
 //= require turbolinks
 //= require popper
+//= require howler.core
 //= require campaigns
 //= require_tree .
