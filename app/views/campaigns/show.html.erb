@@ -13,6 +13,14 @@
 
   <div class="col-8">
     <h1 class="text-center">Sound Board</h1>
+    <div class="container d-flex justify-content-between">
+      <button class="btn btn-outline-secondary btn-lg" id="tavern">Tavern</button>
+      <button class="btn btn-outline-secondary btn-lg" id="forest">Forest</button>
+      <button class="btn btn-outline-secondary btn-lg" id="tavern">Tavern</button>
+      <button class="btn btn-outline-secondary btn-lg" id="tavern">Tavern</button>
+      <button class="btn btn-outline-secondary btn-lg" id="tavern">Tavern</button>
+      
+    </div>
   </div>
 
   <div class="col-2">
@@ -50,12 +58,46 @@ $('#diceRoll').click(function(){
 });
 
 $('#reroll').click(function(){
-      $('#charContainer').append("<%= j render 'characters' %>");
+      $('#charContainer').html("<%= j render 'characters' %>");
 });
 
-var sound = new Howl({
-  src: ['sound.mp3']
+const tavern = new Howl({
+  src: ['/assets/ambient_tavern_short.mp3'],
+  autoplay: false,
+  loop: true,
+  volume: 1,
+  onend: function() {
+    console.log('Finished!');
+  }
 });
 
-sound.play();
+const forest = new Howl({
+  src: ['/assets/ambient_forest_short.mp3'],
+  autoplay: false,
+  loop: true,
+  volume: 1,
+  onend: function() {
+    console.log('Finished!');
+  }
+});
+
+$('#tavern').click(function(){
+  if(tavern.playing() === false) {
+    tavern.play();
+    $('#tavern').addClass('active');
+  } else {
+    tavern.stop();
+    $('#tavern').removeClass('active');
+  };
+});
+
+$('#forest').click(function(){
+  if(forest.playing() === false) {
+    forest.play();
+    $('#forest').addClass('active');
+  } else {
+    forest.stop();
+    $('#forest').removeClass('active');
+  };
+});
 </script>
