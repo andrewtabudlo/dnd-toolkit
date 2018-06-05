@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: "campaigns#index"
+  
   devise_for :users
   resources :characters
   resources :campaigns do
