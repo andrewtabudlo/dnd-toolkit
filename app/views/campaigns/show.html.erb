@@ -136,4 +136,9 @@ $('#skirmish').click(function(){
     $('#skirmish').removeClass('active');
   };
 });
+
+$('.card').click(function(){
+  $(this).toggleClass('border-danger');
+  $(this).siblings().removeClass('border-danger');
+});
 </script>

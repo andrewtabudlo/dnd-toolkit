@@ -1,5 +1,5 @@
 <% @characters.each do |c| %>
-  <div class="card">
+  <div class="card" id="character<%= c.id %>">
     <div class="card-body">
       <h5 class="card-title"><%= c.name %></h5>
       <h6 class="card-subtitle mb-2 text-muted">HP: <%= c.hp %></h6>
