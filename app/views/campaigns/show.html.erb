@@ -8,19 +8,23 @@
     <p class="d-inline-block">d</p>
     <input class="d-inline-block" id="diceSides" type="text" size="3" value="20">
     <button class="d-inline-block" id="diceRoll">Roll</button>
-    <textarea readonly id="dieContainer" class="dice"></textarea>
+    <textarea readonly id="dieContainer" class="dice" rows="10"></textarea>
   </div>
 
   <div class="col-8">
     <h1 class="text-center">Sound Board</h1>
+    <div class="container d-flex flex-wrap justify-content-between">
+      <%= render 'sounds' %>
+    </div>
   </div>
 
   <div class="col-2">
-    <h1>Initiative Tracker</h1>
+    <h1>Initiative</h1>
+    <%= link_to "All Characters", characters_path, method: :get, class: "btn btn-outline-secondary" %>
     <div id="charContainer">
-      <%= render 'characters' %>
+      <%= render 'characters', locals: {characters: @characters} %>
     </div>
-    <%= link_to 'Reroll', reroll_campaign_path, id:"reroll", method: :put, data: { confirm: 'Are you sure you want to reset all initiative rolls?' }, remote: true %>
+    <%= link_to 'Reroll', reroll_campaign_path, id:"reroll", method: :put, class: "btn btn-outline-secondary", data: { confirm: 'Are you sure you want to reset all initiative rolls?' }, remote: true %> 
   </div>
 
 </div>
@@ -50,12 +54,86 @@ $('#diceRoll').click(function(){
 });
 
 $('#reroll').click(function(){
-      $('#charContainer').append("<%= j render 'characters' %>");
+      $('#charContainer').html("<%= j render 'characters' %>");
 });
 
-var sound = new Howl({
-  src: ['sound.mp3']
+const tavern = new Howl({
+  src: ['/assets/ambient_tavern_short.mp3'],
+  autoplay: false,
+  loop: true,
+  volume: 1,
+  onend: function() {
+    console.log('Finished!');
+  }
 });
 
-sound.play();
+const forest = new Howl({
+  src: ['/assets/ambient_forest_short.mp3'],
+  autoplay: false,
+  loop: true,
+  volume: 1,
+  onend: function() {
+    console.log('Finished!');
+  }
+});
+
+const city = new Howl({
+  src: ['/assets/ambient_city_short.mp3'],
+  autoplay: false,
+  loop: true,
+  volume: 1,
+  onend: function() {
+    console.log('Finished!');
+  }
+});
+
+const skirmish = new Howl({
+  src: ['/assets/92_Skirmish.mp3'],
+  autoplay: false,
+  loop: true,
+  volume: 1,
+  onend: function() {
+    console.log('Finished!');
+  }
+});
+
+$('#tavern').click(function(){
+  if(tavern.playing() === false) {
+    tavern.play();
+    $('#tavern').addClass('active');
+  } else {
+    tavern.stop();
+    $('#tavern').removeClass('active');
+  };
+});
+
+$('#forest').click(function(){
+  if(forest.playing() === false) {
+    forest.play();
+    $('#forest').addClass('active');
+  } else {
+    forest.stop();
+    $('#forest').removeClass('active');
+  };
+});
+
+$('#city').click(function(){
+  if(city.playing() === false) {
+    city.play();
+    $('#city').addClass('active');
+  } else {
+    city.stop();
+    $('#city').removeClass('active');
+  };
+});
+
+$('#skirmish').click(function(){
+  if(skirmish.playing() === false) {
+    skirmish.play();
+    $('#skirmish').addClass('active');
+  } else {
+    skirmish.stop();
+    $('#skirmish').removeClass('active');
+  };
+});
 </script>

@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  root to: "campaigns#index"
+  
   devise_for :users
   resources :characters
   resources :campaigns do
     member do
       put 'reroll'
+      put 'character_edit'
     end
   end
   resources :users

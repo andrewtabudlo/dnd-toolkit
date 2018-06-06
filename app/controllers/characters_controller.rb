@@ -19,6 +19,7 @@ class CharactersController < ApplicationController
 
   # GET /characters/1/edit
   def edit
+    @character = Character.find(params[:id])
   end
 
   # POST /characters
@@ -42,7 +43,7 @@ class CharactersController < ApplicationController
   def update
     respond_to do |format|
       if @character.update(character_params)
-        format.html { redirect_to @character, notice: 'Character was successfully updated.' }
+        format.html { redirect_to "/campaigns/#{@character.campaign_id}", notice: 'Character was successfully updated.' }
         format.json { render :show, status: :ok, location: @character }
       else
         format.html { render :edit }
@@ -69,6 +70,6 @@ class CharactersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def character_params
-      params.fetch(:character, {})
+      params.require(:character).permit(:name, :hp, :initiative, :campaign_id, :faction, :active)
     end
 end

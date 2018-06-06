@@ -2,21 +2,26 @@
 
 <h1>Characters</h1>
 
-
+<div class="d-flex flex-wrap">
     <% @characters.each do |c| %>
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title"><%= c.name %></h5>
         <h6 class="card-subtitle mb-2 text-muted">HP: <%= c.hp %></h6>
         <p class="card-text">Initiative Roll: <%= c.initiative %></p>
+        <% if c.campaign_id != nil %>
+          <p class="card-text">Campaign: <%= Campaign.find(c.campaign_id).name %></p>
+        <% else %>
+          <p class="card-text">Campaign: <em>unassigned</em></p>
+        <% end %>
         <%= link_to 'Show', c, class: "btn btn-outline-secondary btn-sm" %>
-        <%= link_to 'Edit', edit_character_path(c), class: "btn btn-outline-secondary btn-sm" %>
+        <%= link_to 'Edit', edit_character_path(c), class: "btn btn-outline-secondary btn-sm", remote: true %>
         <%= link_to 'Destroy', c, method: :delete,class: "btn btn-outline-secondary btn-sm", data: { confirm: 'Are you sure?' } %>
         <a href="#" class="btn btn-outline-secondary btn-sm">Done</a>
       </div>
     </div>
     <% end %>
-
+</div>
 <br>
 
 <%= link_to 'New Character', new_character_path %>

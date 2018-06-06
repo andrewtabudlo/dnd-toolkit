@@ -4,8 +4,7 @@
       <h5 class="card-title"><%= c.name %></h5>
       <h6 class="card-subtitle mb-2 text-muted">HP: <%= c.hp %></h6>
       <p class="card-text">Initiative Roll: <%= c.initiative %></p>
-      <%= link_to 'Edit', edit_character_path(c), class: "btn btn-outline-secondary btn-sm" %>
-      <a href="#" class="btn btn-outline-secondary btn-sm">Done</a>
+      <%= link_to 'Edit', edit_character_path(c), class: "btn btn-outline-secondary btn-sm", remote: true %>
     </div>
   </div>
 <% end %>
