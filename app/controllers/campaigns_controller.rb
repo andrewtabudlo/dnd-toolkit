@@ -11,7 +11,7 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1.json
   def show
     @campaign = Campaign.find(params[:id])
-    @characters = Character.where(campaign_id: params[:id]).order(initiative: :desc)
+    @characters = Character.where(campaign_id: params[:id]).where(active: true).order(initiative: :desc)
   end
 
   # GET /campaigns/new
@@ -65,13 +65,12 @@ class CampaignsController < ApplicationController
   end
 
   def reroll
-    @characters = Character.where(campaign_id: params[:id])
+    @characters = Character.where(campaign_id: params[:id]).where(active: true).order(initiative: :desc)
     @characters.each do |c|
       char = Character.find(c.id)
       char.initiative = rand(20) + 1
       char.save
     end
-    # redirect_to "/campaigns/#{params[:id]}"
   end
 
   private

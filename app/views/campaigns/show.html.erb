@@ -13,23 +13,18 @@
 
   <div class="col-8">
     <h1 class="text-center">Sound Board</h1>
-    <div class="container d-flex justify-content-between">
-      <button class="btn btn-outline-secondary btn-lg" id="tavern">Tavern</button>
-      <button class="btn btn-outline-secondary btn-lg" id="forest">Forest</button>
-      <button class="btn btn-outline-secondary btn-lg" id="city">City</button>
-      <button class="btn btn-outline-secondary btn-lg" id="tavern">Tavern</button>
-      <button class="btn btn-outline-secondary btn-lg" id="skirmish">Skirmish</button>
-      
+    <div class="container d-flex flex-wrap justify-content-between">
+      <%= render 'sounds' %>
     </div>
   </div>
 
   <div class="col-2">
-    <h1>Initiative Tracker</h1>
+    <h1>Initiative</h1>
     <%= link_to "All Characters", characters_path, method: :get, class: "btn btn-outline-secondary" %>
     <div id="charContainer">
       <%= render 'characters', locals: {characters: @characters} %>
     </div>
-    <%= link_to 'Reroll', reroll_campaign_path, id:"reroll", method: :put, class: "btn btn-outline-secondary", data: { confirm: 'Are you sure you want to reset all initiative rolls?' }, remote: true %>
+    <%= link_to 'Reroll', reroll_campaign_path, id:"reroll", method: :put, class: "btn btn-outline-secondary", data: { confirm: 'Are you sure you want to reset all initiative rolls?' }, remote: true %> 
   </div>
 
 </div>

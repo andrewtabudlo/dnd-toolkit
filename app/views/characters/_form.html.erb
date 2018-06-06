@@ -1,23 +1,33 @@
-<%= form_with(model: character, local: true) do |form| %>
-  <% if character.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(character.errors.count, "error") %> prohibited this character from being saved:</h2>
+<div id="contact-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-body">
+      <%= form_with(model: @character, local: true) do |form| %>
+        <% if @character.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(character.errors.count, "error") %> prohibited this character from being saved:</h2>
 
-      <ul>
-      <% character.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+            <ul>
+            <% character.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= bootstrap_form_for @character do |f| %>
+            <%= f.text_field :name %>
+            <%= f.number_field :hp %>
+            <%= f.number_field :initiative %>
+            <%= f.text_field :faction %>
+            <%= f.check_box :active %>
+            <%= f.collection_select :campaign_id, Campaign.all, :id, :name %>
+            <%= f.submit %>
+          <% end %>
+        </div>
       <% end %>
-      </ul>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= bootstrap_form_for @character do |f| %>
-      <%= f.text_field :name %>
-      <%= f.number_field :hp %>
-      <%= f.number_field :initiative %>
-      <%= f.collection_select :campaign_id, Campaign.all, :id, :name %>
-      <%= f.submit %>
-    <% end %>
   </div>
-<% end %>
+</div>

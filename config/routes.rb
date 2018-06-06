@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :campaigns do
     member do
       put 'reroll'
+      put 'character_edit'
     end
   end
   resources :users

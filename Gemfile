@@ -59,3 +59,4 @@ gem "bootstrap_form",
     git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
     branch: "master"
 gem 'jquery-rails'
+gem 'acts_as_list'
