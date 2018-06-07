@@ -1,3 +1,1 @@
-$('#reroll').click(function(){
-    $('#charContainer').html("<%= j render 'characters' %>");
-});
+$("#charContainer").html("<%= j render partial: 'characters', locals: { characters: @characters } %>");
