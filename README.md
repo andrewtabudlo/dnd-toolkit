@@ -1,26 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A toolkit for D&D Dungeon Masters, including dice roller, sound board, and initiative tracker.
 
-Things you may want to cover:
+Example account:  
+User: admin@example.com  
+Pass: 123456
 
-* Ruby version
+Gems/Frameworks used:  
+* Howlerjs  
+* Devise 
+* Bootstrap 
+* jQuery
 
-* System dependencies
+## Useage
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-Gems/Frameworks used: Howlerjs Devise Bootstrap jQuery
+Users are able to create campaigns and characters.  
+Characters can be assigned to campaigns and set as active to show on the initiative timeline.  
+Initiative can be set manually per character or all at once with the `reroll` button at the bottom of the initiative tracker.
